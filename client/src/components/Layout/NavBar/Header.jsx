@@ -15,6 +15,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 // core components
 import styles from "./assets/headerStyle";
+import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
 
@@ -31,9 +32,9 @@ export default function Header(props) {
       }
     };
   });
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  // const handleDrawerToggle = () => {
+  //   setMobileOpen(!mobileOpen);
+  // };
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
     const windowsScrollTop = window.pageYOffset;
@@ -60,7 +61,7 @@ export default function Header(props) {
     [classes.absolute]: absolute,
     [classes.fixed]: fixed
   });
-  const brandComponent = <Button className={classes.title}>{brand}</Button>;
+  const brandComponent = <Typography className={classes.title}>{brand}</Typography>;
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
@@ -74,7 +75,7 @@ export default function Header(props) {
             brandComponent
           )}
         </div>
-        <Hidden smDown implementation="css">
+        {/* <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
         <Hidden mdUp>
@@ -85,9 +86,9 @@ export default function Header(props) {
           >
             <Menu />
           </IconButton>
-        </Hidden>
+        </Hidden> */}
       </Toolbar>
-      <Hidden mdUp implementation="js">
+      {/* <Hidden mdUp implementation="js">
         <Drawer
           variant="temporary"
           anchor={"right"}
@@ -102,7 +103,7 @@ export default function Header(props) {
             {rightLinks}
           </div>
         </Drawer>
-      </Hidden>
+      </Hidden> */}
     </AppBar>
   );
 }
