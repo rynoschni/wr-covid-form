@@ -359,7 +359,22 @@ const _handleRace = (input) => {
                 value={race}
                 select
               >
-                <MenuItem value="">*clear*</MenuItem>
+                <MenuItem value="American Indian or Alaska Native">
+                  American Indian or Alaska Native
+                </MenuItem>
+                <MenuItem value="Asian">Asian</MenuItem>
+                <MenuItem value="Black or African American">
+                  Black or African American
+                </MenuItem>
+                <MenuItem value="Hispanic or Latino">
+                  Hispanic or Latino
+                </MenuItem>
+                <MenuItem value="Native Hawaiian or Other Pacific Islander">
+                  Native Hawaiian or Other Pacific Islander
+                </MenuItem>
+                <MenuItem value="White, non-hispanic">
+                  White, non-hispanic
+                </MenuItem>
               </TextField>
             </Grid>
             <Grid item xs={12}>
@@ -376,7 +391,25 @@ const _handleRace = (input) => {
                 value={ethnicity}
                 select
               >
-                <MenuItem value="">*clear*</MenuItem>
+                <MenuItem value="African">African</MenuItem>
+                <MenuItem value="Arabic">Arabic</MenuItem>
+                <MenuItem value="Australasian/Aboriginal">
+                  Australasian/Aboriginal
+                </MenuItem>
+                <MenuItem value="Caribbean">Caribbean</MenuItem>
+                <MenuItem value="Chinese">Chinese</MenuItem>
+                <MenuItem value="Cuban">Cuban</MenuItem>
+                <MenuItem value="Pacific Islander">Pacific Islander</MenuItem>
+                <MenuItem value="Japanese">Japanese</MenuItem>
+                <MenuItem value="Korean">Korean</MenuItem>
+                <MenuItem value="Polynesian">Polynesian</MenuItem>
+                <MenuItem value="African ">African</MenuItem>
+                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="African ">African </MenuItem>
               </TextField>
             </Grid>
             {/* <Grid item xs={12}>
