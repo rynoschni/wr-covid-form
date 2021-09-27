@@ -1,14 +1,13 @@
 'use strict';
 
 const http = require('http');
-const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3333;
 const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const connectDB = require('./config/db.js');
-connectDB();
+// const connectDB = require('./config/db.js');
+// connectDB();
 
 const es6Renderer = require('express-es6-template-engine');
 
@@ -32,16 +31,16 @@ app.set('view engine', 'html');
 
 app.use(express.static('public'));
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(
-    bodyParser.urlencoded({
-        extended: false,
+    express.urlencoded({
+        extended: true,
     })
 );
 app.use(cors(corsOptions));
 
 server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`YO JOE!  Coming in hot on port http://localhost:${PORT}`);
 });
 
 app.get('/', (req, res) => {
@@ -51,9 +50,12 @@ app.get('/', (req, res) => {
 const userController = require('./routes/userRoutes.js');
 const teamController = require('./routes/teamRoutes.js');
 const documentController = require('./routes/documentRoutes.js');
-const getCardInfoController = require('./routes/getCardInfoRoutes.js');
+const getCardInfoController = require('./routes/getCardInfoRoutes.js')
+const formController = require('./routes/covidFormRoutes.js');
 
 app.use('/user', userController);
 app.use('/team', teamController);
 app.use('/document', documentController);
 app.use('/getCardInfo', getCardInfoController);
+app.use('/covid-form', formController);
+

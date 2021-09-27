@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const teamSchema = mongoose.Schema(
-    {
-        teamName: {
-            type: String,
-            required: true
-        },
-    }
-);
+// const teamSchema = mongoose.Schema(
+//     {
+//         teamName: {
+//             type: String,
+//             required: true
+//         },
+//     }
+// );
 
-const Team = mongoose.model('Team', teamSchema);
+// const Team = mongoose.model('Team', teamSchema);
 
-module.exports = Team;
+// module.exports = Team;
