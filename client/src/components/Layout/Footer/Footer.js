@@ -33,45 +33,33 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/?ref=mkr-footer"
+                href="mailto:mistymedic4@gmail.com"
                 className={classes.block}
                 target="_blank"
               >
-                SquadMate
+                Contact Misty
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+                href="mailto:ryan@10bladepro.com?subject=COVID Site Trouble"
                 className={classes.block}
                 target="_blank"
               >
-                About us
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Terms of Service
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=mkr-footer"
-                className={classes.block}
-                target="_blank"
-              >
-                Security and Privacy
+                Issues with the site? Contact Ryan
               </a>
             </ListItem>
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} {''}
-            SquadMate
+          <a
+                href="https://10bladepro.com"
+                className={classes.block}
+                target="_blank"
+              >
+          &copy; {1900 + new Date().getYear()} {""}
+          10Blade Productions
+          </a>
         </div>
       </div>
     </footer>

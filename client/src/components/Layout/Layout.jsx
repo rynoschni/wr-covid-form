@@ -1,7 +1,7 @@
 import React from "react";
 import AdminHeader from "./NavBar/AdminHeader";
 import UserHeader from "./NavBar/UserHeader";
-import HomeHeader from "./NavBar/HomeHeader";
+import Header from "./NavBar/Header";
 import HomeHeaderLinks from "./NavBar/HomeHeaderLinks.js";
 import AdminLinks from "./NavBar/AdminLinks.js";
 import UserLinks from './NavBar/UserLinks.js';
@@ -40,53 +40,84 @@ const Layout = props =>{
             />
 
     return (
-        <>
+      <>
         <div>
-            <div className="removePrint">
-            {!!isLoggedIn ?
-                <LoginDisplay
-                    isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUser={setUser} user={user} isAdmin={isAdmin} setIsAdmin={setIsAdmin}
+          <div className="removePrint">
+            {!!isLoggedIn ? (
+              <LoginDisplay
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                setUser={setUser}
+                user={user}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            ) : (
+              <Header
+                brand="What Remains COVID Form"
+                fixed
+                color="secondary"
+                
+                {...rest}
+              />
+            )}
+          </div>
+          <Switch>
+            <Route exact path="/">
+              <Signin
+                user={user}
+                setUser={setUser}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            </Route>
+            {/* <Route path="/home">
+              <Home />
+            </Route> */}
+            {/* <Route path="/signin"></Route> */}
+            <Route path="/signup">
+              <Signup
+                user={user}
+                setUser={setUser}
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                isAdmin={isAdmin}
+                setIsAdmin={setIsAdmin}
+              />
+            </Route>
+            <Route path="/admin">
+              {isLoggedIn ? (
+                <Admin
+                  user={user}
+                  setUser={setUser}
+                  isAdmin={isAdmin}
+                  setIsAdmin={setIsAdmin}
                 />
-            :   <HomeHeader
-                    
-                    rightLinks={<HomeHeaderLinks />}
-                    fixed
-                    color="transparent"
-                    changeColorOnScroll={{
-                    height: 400,
-                    color: "white"
-                    }}
-                    {...rest} 
-                />}
-            </div>
-                <Switch>
-                    <Route exact path="/">
-                        <Home user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
-                    </Route>
-                    <Route path="/home">
-                        <Home />
-                    </Route>
-                    <Route path="/signin">
-                        <Signin user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
-                    </Route>
-                    <Route path="/signup">
-                        <Signup user={user} setUser={setUser} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/>
-                    </Route>
-                    <Route path="/admin">
-                        {isLoggedIn ? <Admin user={user} setUser={setUser} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/> : <Redirect to="/signin" />}
-                        
-                    </Route>
-                    <Route path="/user">
-                        {isLoggedIn ? <User user={user} setUser={setUser} isAdmin={isAdmin} setIsAdmin={setIsAdmin}/> : <Redirect to="/signin" />}
-                        
-                    </Route>
-                    <Route path="/getCardInfo/:id">
-                        <GetCardInfo />
-                    </Route>
-                </Switch>
+              ) : (
+                <Redirect to="/" />
+              )}
+            </Route>
+            <Route path="/user">
+              {isLoggedIn ? (
+                <User
+                  user={user}
+                  setUser={setUser}
+                  isAdmin={isAdmin}
+                  setIsAdmin={setIsAdmin}
+                />
+              ) : (
+                <Redirect to="/" />
+              )}
+            </Route>
+            <Route path="/getCardInfo/:id">
+              <GetCardInfo />
+            </Route>
+          </Switch>
         </div>
         <Footer />
-        </>
+      </>
     );
 }
 
