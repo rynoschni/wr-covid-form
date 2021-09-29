@@ -1,50 +1,48 @@
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import { useHistory } from 'react-router-dom';
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router-dom";
+import { MenuItem } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    color: 'black',
-    width: '100%', // Fix IE 11 issue.
+    color: "black",
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
-    backgroundColor: 'white',
-    padding: '30px 30px 30px 30px',
-    borderRadius: '20px',
+    backgroundColor: "white",
+    padding: "30px 30px 30px 30px",
+    borderRadius: "20px",
   },
   submit: {
-    backgroundColor: '#223F84',
+    backgroundColor: "#223F84",
     margin: theme.spacing(3, 0, 2),
   },
   red: {
-    color: 'red'
-  }
+    color: "red",
+  },
 }));
 
 export default function SignUp(props) {
   const classes = useStyles();
-  const { setUser, setIsLoggedIn } = props; 
+  const { setUser, setIsLoggedIn } = props;
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -55,24 +53,27 @@ export default function SignUp(props) {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
+  const [county, setCounty] = useState("");
   const [phone, setPhone] = useState("");
+  const [gender, setGender] = useState("");
+  const [dob, setDOB] = useState("");
   const [race, setRace] = useState("");
   const [ethnicity, setEthnicity] = useState("");
   // const [checked, setChecked] = useState(false);
   const history = useHistory();
 
-  const _handleFirstName = input => {
+  const _handleFirstName = (input) => {
     setFirstName(input);
-  }
-  const _handleLastName = input => {
+  };
+  const _handleLastName = (input) => {
     setLastName(input);
-  }
-  const _handleEmail = input => {
+  };
+  const _handleEmail = (input) => {
     setEmail(input);
-  }
-  const _handlePassword = input => {
+  };
+  const _handlePassword = (input) => {
     setPassword(input);
-  }
+  };
   const _handleAddress1 = (input) => {
     setAddress1(input);
   };
@@ -85,15 +86,24 @@ export default function SignUp(props) {
   const _handleState = (input) => {
     setState(input);
   };
+  const _handleCounty = (input) => {
+    setCounty(input);
+  };
   const _handleZip = (input) => {
     setZip(input);
   };
   const _handlePhone = (input) => {
     setPhone(input);
   };
-const _handleRace = (input) => {
-  setRace(input);
-};
+  const _handleGender = (input) => {
+    setGender(input);
+  };
+  const _handleDOB = (input) => {
+    setDOB(input);
+  };
+  const _handleRace = (input) => {
+    setRace(input);
+  };
   const _handleEthnicity = (input) => {
     setEthnicity(input);
   };
@@ -101,9 +111,9 @@ const _handleRace = (input) => {
   //   setChecked(!checked);
   // }
 
-  const _handleSubmit = async(e) => {
+  const _handleSubmit = async (e) => {
     e.preventDefault();
-      
+
     let data = {
       fName: firstName,
       lName: lastName,
@@ -114,26 +124,39 @@ const _handleRace = (input) => {
       city: city,
       state: state,
       zip: zip,
+      county: county,
       phone: phone,
+      gender: gender,
+      dob: dob,
       race: race,
-      ethnicity: ethnicity
-    }
+      ethnicity: ethnicity,
+    };
 
     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/`, {
-      method: 'POST',
-      headers: { 'Content-Type' : 'application/json' },
-      body: JSON.stringify(data)
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
     const resdata = await response.json();
     setUser(resdata);
     setIsLoggedIn(true);
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    history.push('/user');
-    
-  } 
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setAddress1("");
+    setAddress2("");
+    setCity("");
+    setState("");
+    setZip("");
+    setCounty("");
+    setPhone("");
+    setGender("");
+    setDOB("");
+    setRace("");
+    setEthnicity("");
+    history.push("/user");
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -372,9 +395,7 @@ const _handleRace = (input) => {
                 <MenuItem value="Native Hawaiian or Other Pacific Islander">
                   Native Hawaiian or Other Pacific Islander
                 </MenuItem>
-                <MenuItem value="White, non-hispanic">
-                  White, non-hispanic
-                </MenuItem>
+                <MenuItem value="White, non-hispanic">White</MenuItem>
               </TextField>
             </Grid>
             <Grid item xs={12}>
@@ -391,25 +412,8 @@ const _handleRace = (input) => {
                 value={ethnicity}
                 select
               >
-                <MenuItem value="African">African</MenuItem>
-                <MenuItem value="Arabic">Arabic</MenuItem>
-                <MenuItem value="Australasian/Aboriginal">
-                  Australasian/Aboriginal
-                </MenuItem>
-                <MenuItem value="Caribbean">Caribbean</MenuItem>
-                <MenuItem value="Chinese">Chinese</MenuItem>
-                <MenuItem value="Cuban">Cuban</MenuItem>
-                <MenuItem value="Pacific Islander">Pacific Islander</MenuItem>
-                <MenuItem value="Japanese">Japanese</MenuItem>
-                <MenuItem value="Korean">Korean</MenuItem>
-                <MenuItem value="Polynesian">Polynesian</MenuItem>
-                <MenuItem value="African ">African</MenuItem>
-                <MenuItem value="African ">African </MenuItem>
-                <MenuItem value="African ">African </MenuItem>
-                <MenuItem value="African ">African </MenuItem>
-                <MenuItem value="African ">African </MenuItem>
-                <MenuItem value="African ">African </MenuItem>
-                <MenuItem value="African ">African </MenuItem>
+                <MenuItem value="Hispanic">Hispanic</MenuItem>
+                <MenuItem value="Non-Hispanic">Non-Hispanic</MenuItem>
               </TextField>
             </Grid>
             {/* <Grid item xs={12}>
