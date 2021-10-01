@@ -115,8 +115,8 @@ export default function SignUp(props) {
     e.preventDefault();
 
     let data = {
-      fName: firstName,
-      lName: lastName,
+      fname: firstName,
+      lname: lastName,
       email: email,
       password: password,
       address1: address1,
