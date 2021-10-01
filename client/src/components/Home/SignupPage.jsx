@@ -59,7 +59,7 @@ export default function SignUp(props) {
   const [county, setCounty] = useState("");
   const [phone, setPhone] = useState("");
   const [gender, setGender] = useState("");
-  const [dob, setDOB] = useState("");
+  const [dob, setDOB] = useState(new Date());
   const [race, setRace] = useState("");
   const [ethnicity, setEthnicity] = useState("");
   // const [checked, setChecked] = useState(false);
@@ -100,9 +100,6 @@ export default function SignUp(props) {
   };
   const _handleGender = (input) => {
     setGender(input);
-  };
-  const _handleDOB = (input) => {
-    setDOB(input);
   };
   const _handleRace = (input) => {
     setRace(input);
@@ -249,7 +246,6 @@ export default function SignUp(props) {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 name="address2"
                 label="Address 2 (Apt, Suite, etc)"
@@ -340,6 +336,20 @@ export default function SignUp(props) {
                 <MenuItem value="WI">WI</MenuItem>
                 <MenuItem value="WY">WY</MenuItem>
               </TextField>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="county"
+                label="County"
+                type="text"
+                id="county"
+                autoComplete="county"
+                onChange={(e) => _handleCounty(e.target.value)}
+                value={county}
+              />
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -446,7 +456,9 @@ export default function SignUp(props) {
                   openTo="year"
                   views={["year", "month", "day"]}
                   value={dob}
-                  onChange={(e) => _handleDOB(e.target.value)}
+                  onChange={(newValue) => {
+                    setDOB(newValue);
+                  }}
                   renderInput={(params) => (
                     <TextField
                       variant="outlined"
@@ -454,6 +466,7 @@ export default function SignUp(props) {
                       fullWidth
                       name="dob"
                       id="dob"
+                      autoComplete="dob"
                       {...params}
                     />
                   )}
@@ -480,7 +493,7 @@ export default function SignUp(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="/signin" variant="body2">
+              <Link href="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
