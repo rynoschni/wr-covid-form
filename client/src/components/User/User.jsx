@@ -209,7 +209,7 @@ const User = (props) => {
 
         <Route exact path="/user">
         <h1>Welcome to SquadMate {user.firstName}!</h1>
-        {!!user.emergencyFormDone ? "" : (
+        {!!user.formDue ? (
           <Alert 
             className={classes.alert}
             variant="filled"
@@ -217,9 +217,9 @@ const User = (props) => {
           >
             Critical Profile Items Missing
           <br />
-          {!!user.emergencyFormDone ? "" : <Link to='/user/forms'>Emergency Contact Form</Link>}
+          {!!user.formDue ? <Link to='/user/forms'>Emergency Contact Form</Link> : "" }
           </Alert>
-        )}
+        ) : "" }
         <div>
           
           <Card key={user._id} variant="outlined">
