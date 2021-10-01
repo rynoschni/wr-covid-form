@@ -1,4 +1,4 @@
-const localUser = {
+export const localUser = {
   fName: "",
   lName: "",
   email: "",
@@ -14,6 +14,10 @@ const localUser = {
   dob: "",
   race: "",
   ethnicity: "",
+  ecFirstName: "",
+  ecLastName: "",
+  ecPhone: "",
+  ecRelation: "",
   isAdmin: false,
   formDue: true
 };
