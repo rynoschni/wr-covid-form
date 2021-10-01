@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import { TextField, Container, Button, FormControl, Radio, RadioGroup, FormLabel, FormControlLabel, Typography } from '@material-ui/core';
+import { TextField, Container, Button, Typography } from '@material-ui/core';
 import Avatar from 'react-avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
-import UploadPhoto from '../Admin/UploadPhoto';
+// import UploadPhoto from '../Admin/UploadPhoto';
 
 // const Wrapper = styled.div`
 //   border-radius: 5px;

@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 //MUI Core, labs, and styles
 import { makeStyles } from '@material-ui/core/styles';
-import { ButtonBase, Typography, Breadcrumbs, CardContent, Divider, Paper, Chip } from '@material-ui/core';
+import { ButtonBase, Typography, Breadcrumbs, CardContent, Paper, Chip } from '@material-ui/core';
 import { Alert } from '@mui/lab';
 //MUI Icons
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -12,9 +12,8 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import GroupIcon from '@material-ui/icons/Group';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
-import PhoneIcon from '@material-ui/icons/Phone';
+
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 //components
 import UserProfile from "./UserProfile";
 import InitialForm from "./InitialForm";
@@ -22,7 +21,6 @@ import UserDocuments from './UserDocuments';
 import UserTeamList from "./UserTeamList";
 //styles
 import styled from 'styled-components';
-import { ContactSupportOutlined } from '@material-ui/icons';
 
 const BreadcrumbWrapper = styled.div`
   background-color: #FFBA00;
@@ -54,10 +52,6 @@ const Card = styled.div`
 const Title = styled.div`
     border-radius: 7px 7px 0 0;
     padding: 0 7px;
-`;
-
-const Detail = styled.div`
-    padding: 5px 20px;
 `;
 
 const images = [
