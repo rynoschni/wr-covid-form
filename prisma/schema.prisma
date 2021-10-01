@@ -24,22 +24,28 @@ model Form {
   signature2box Boolean  @default(false)
   createdAt     DateTime @default(now()) @db.Timestamp(6)
   authorId      Int
+  temp          String?  @db.VarChar
+  results       String?
   user          User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model User {
-  id        Int     @id @default(autoincrement())
-  email     String  @unique @db.VarChar(255)
-  fname     String? @db.VarChar(255)
-  lname     String? @db.VarChar(255)
-  address1  String? @db.VarChar(255)
-  address2  String? @db.VarChar(255)
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(255)
+  fname     String?  @db.VarChar(255)
+  lname     String?  @db.VarChar(255)
+  address1  String?  @db.VarChar(255)
+  address2  String?  @db.VarChar(255)
   city      String?
   state     String?
-  zip       Int?
-  phone     String? @db.VarChar(255)
-  race      String? @db.VarChar(255)
-  ethnicity String? @db.VarChar(255)
-  password  String? @db.VarChar
+  zip       String?  @db.VarChar
+  phone     String?  @db.VarChar(255)
+  race      String?  @db.VarChar(255)
+  ethnicity String?  @db.VarChar(255)
+  password  String?  @db.VarChar
+  isAdmin   Boolean? @default(false)
+  gender    String?
+  county    String?
+  dob       String?  @db.VarChar
   form      Form[]
 }

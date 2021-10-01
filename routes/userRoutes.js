@@ -28,8 +28,7 @@ router.get('/:id', async (req, res) => {
 
 // Create User
 router.post('/', async (req, res) => {
-    const { email, password, fname, lname, address1, address2, city, state, zip, phone, race, ethnicity } = req.body
-    let userPassword = password
+    const { email, password, fname, lname, address1, address2, city, state, county, zip, phone, race, ethnicity, gender, dob } = req.body
     
     const hashPassword = bcrypt.hashSync(password, salt);
     console.log("Hashed Pw", hashPassword)
@@ -43,10 +42,13 @@ router.post('/', async (req, res) => {
             address2,
             city,
             state,
+            county,
             zip,
             phone,
             race,
             ethnicity,
+            gender,
+            dob
         }
     })
     console.log("user created", createdUser)
@@ -76,11 +78,48 @@ router.post('/login', async (req, res) => {
 
 // Update User
 router.put('/update/:id', async (req, res) => {
-    console.log('ID', req.params.id), console.log('Body', req.body);
-    const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
-        new: true,
-        runValidators: true,
-    }).select('-password');
+    const userID = req.params.id
+    const {
+      email,
+      password,
+      fname,
+      lname,
+      address1,
+      address2,
+      city,
+      state,
+      county,
+      zip,
+      phone,
+      race,
+      ethnicity,
+      gender,
+      dob,
+    } = req.body;
+
+    console.log('ID', userID), console.log('Body', req.body);
+    const user = await prisma.user.update({
+      where: {
+        id: userID,
+      },
+      data: {
+        email,
+        password,
+        fname,
+        lname,
+        address1,
+        address2,
+        city,
+        state,
+        county,
+        zip,
+        phone,
+        race,
+        ethnicity,
+        gender,
+        dob,
+      },
+    });
     res.json(user);
 });
 

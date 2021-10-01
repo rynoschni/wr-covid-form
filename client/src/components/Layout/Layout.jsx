@@ -2,12 +2,10 @@ import React from "react";
 import AdminHeader from "./NavBar/AdminHeader";
 import UserHeader from "./NavBar/UserHeader";
 import Header from "./NavBar/Header";
-import HomeHeaderLinks from "./NavBar/HomeHeaderLinks.js";
 import AdminLinks from "./NavBar/AdminLinks.js";
 import UserLinks from './NavBar/UserLinks.js';
 import AdminLeftLinks from './NavBar/AdminLeftLinks.js';
 import UserLeftLinks from './NavBar/UserLeftLinks.js';
-import Home from "../Home/Home";
 import Footer from "./Footer/Footer";
 import Admin from '../Admin/Admin';
 import User from "../User/User";
@@ -73,10 +71,6 @@ const Layout = props =>{
                 setIsAdmin={setIsAdmin}
               />
             </Route>
-            {/* <Route path="/home">
-              <Home />
-            </Route> */}
-            {/* <Route path="/signin"></Route> */}
             <Route path="/signup">
               <Signup
                 user={user}
