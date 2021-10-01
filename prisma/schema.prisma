@@ -30,22 +30,22 @@ model Form {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique @db.VarChar(255)
-  fname     String?  @db.VarChar(255)
-  lname     String?  @db.VarChar(255)
-  address1  String?  @db.VarChar(255)
-  address2  String?  @db.VarChar(255)
+  id        Int       @id @default(autoincrement())
+  email     String    @unique @db.VarChar(255)
+  fname     String?   @db.VarChar(255)
+  lname     String?   @db.VarChar(255)
+  address1  String?   @db.VarChar(255)
+  address2  String?   @db.VarChar(255)
   city      String?
   state     String?
-  zip       String?  @db.VarChar
-  phone     String?  @db.VarChar(255)
-  race      String?  @db.VarChar(255)
-  ethnicity String?  @db.VarChar(255)
-  password  String?  @db.VarChar
-  isAdmin   Boolean? @default(false)
+  zip       String?   @db.VarChar
+  phone     String?   @db.VarChar(255)
+  race      String?   @db.VarChar(255)
+  ethnicity String?   @db.VarChar(255)
+  password  String?   @db.VarChar
+  isAdmin   Boolean?  @default(false)
   gender    String?
   county    String?
-  dob       String?  @db.VarChar
+  dob       DateTime? @db.Date
   form      Form[]
 }
