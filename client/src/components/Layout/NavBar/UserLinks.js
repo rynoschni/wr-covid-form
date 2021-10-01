@@ -35,53 +35,14 @@ export default function UserLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Links"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/user/team" className={classes.dropdownLink}>
-              Team
-            </Link>,
-            <Link to="/user/info" className={classes.dropdownLink}>
-            Documents & Info
-          </Link>
-          ]}
-        />
+        <Button className={classes.navLink}
+          color="transparent"
+          onClick={() => _handleClick()}
+        >
+          Log Out
+        </Button>
+        
       </ListItem>
-      <ListItem className={classes.listItem}>
-                  <CustomDropdown
-                    left
-                    caret={false}
-                    hoverColor="black"
-                    buttonText={
-                      <Avatar
-                      src={user.avatarUrl} 
-                      name={user.firstName + ' ' + user.lastName}
-                      size="45" 
-                      round /> 
-                      
-                    }
-                    buttonProps={{
-                      className:
-                        classes.navLink + " " + classes.imageDropdownButton,
-                      color: "transparent"
-                    }}
-                    dropdownList={[
-                      <Link to="/user/profile" className={classes.dropdownLink}>
-                        My Profile
-                      </Link>,
-                      <Button 
-                        onClick={() => _handleClick()}>
-                          Log Out
-                        </Button>,
-                    ]}
-                  />
-                </ListItem>
     </List>
   );
 }

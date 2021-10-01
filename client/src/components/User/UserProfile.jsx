@@ -62,84 +62,71 @@ const UserProfile = ({user, setUser, setProfilePicture, profilePicture}) =>{
 
     const [updateProfilePicture, setUpdateProfilePicture] = useState(false);
 
-    const [riderFirstName, setRiderFirstName] = useState(user.parentForm.rider.firstName);
-    const [riderLastName, setRiderLastName] = useState(user.parentForm.rider.lastName);
-    const [riderEmail, setRiderEmail] = useState(user.parentForm.rider.email);
-    const [riderCellPhone, setRiderCellPhone] = useState(user.parentForm.rider.phone.cell);
+    const [FirstName, setFirstName] = useState(user.fname);
+    const [LastName, setLastName] = useState(user.lname);
+    const [Email, setEmail] = useState(user.email);
+  const [Phone, setPhone] = useState(user.phone);
+  const [password, setPassword] = useState("");
+  const [address1, setAddress1] = useState(user.address1);
+  const [address2, setAddress2] = useState(user.address2);
+  const [city, setCity] = useState(user.city);
+  const [state, setState] = useState(user.state);
+  const [zip, setZip] = useState(user.zip);
+  const [county, setCounty] = useState(user.county);
+  const [gender, setGender] = useState(user.gender);
+  const [dob, setDOB] = useState(user.dob);
+  const [race, setRace] = useState(user.race);
+  const [ethnicity, setEthnicity] = useState(user.ethnicity);
 
-    const [parentOneFirstName, setParentOneFirstName] = useState(user.parentForm.parentOne.firstName);
-    const [parentOneLastName, setParentOneLastName] = useState(user.parentForm.parentOne.lastName);
-    const [parentOneCellPhone, setParentOneCellPhone] = useState(user.parentForm.parentOne.phone.cell);
-    const [parentOneHomePhone, setParentOneHomePhone] = useState(user.parentForm.parentOne.phone.home);
-    const [email, setEmail] = useState(user.email);
-
-  const [parentTwoFirstName, setParentTwoFirstName] = useState(user.parentForm.parentTwo.firstName);
-  const [parentTwoLastName, setParentTwoLastName] = useState(user.parentForm.parentTwo.lastName);
-  const [parentTwoCellPhone, setParentTwoCellPhone] = useState(user.parentForm.parentTwo.phone.cell);
-    const [parentTwoHomePhone, setParentTwoHomePhone] = useState(user.parentForm.parentTwo.phone.cell);
-
-    const [emergencyContactOneFirstName, setEmergencyContactOneFirstName] = useState(user.parentForm.emergencyContactOne.firstName);
-    const [emergencyContactOneLastName, setEmergencyContactOneLastName] = useState(user.parentForm.emergencyContactOne.lastName);
-    const [emergencyContactOneCellPhone, setEmergencyContactOneCellPhone] = useState(user.parentForm.emergencyContactOne.phone.cell);
-    const [emergencyContactOneHomePhone, setEmergencyContactOneHomePhone] = useState(user.parentForm.emergencyContactOne.phone.home);
-
-    const [emergencyContactTwoFirstName, setEmergencyContactTwoFirstName] = useState(user.parentForm.emergencyContactTwo.firstName);
-    const [emergencyContactTwoLastName, setEmergencyContactTwoLastName] = useState(user.parentForm.emergencyContactTwo.lastName);
-    const [emergencyContactTwoCellPhone, setEmergencyContactTwoCellPhone] = useState(user.parentForm.emergencyContactTwo.phone.cell);
-    const [emergencyContactTwoHomePhone, setEmergencyContactTwoHomePhone] = useState(user.parentForm.emergencyContactTwo.phone.home);
-
-    const [insuranceProvider, setInsuranceProvider] = useState(user.insurance.provider);
-    const [insurancePolicyNumber, setInsurancePolicyNumber] = useState(user.insurance.number);
-    const [insuranceGroup, setInsuranceGroup] = useState(user.insurance.group);
-
-    const [ibReleaseRadio, setIbReleaseRadio] = useState(String(user.ibuprofenRelease));
+    const [emergencyContactOneFirstName, setEmergencyContactOneFirstName] = useState(user.ecFirstName);
+    const [emergencyContactOneLastName, setEmergencyContactOneLastName] = useState(user.ecLastName);
+    const [emergencyContactOnePhone, setEmergencyContactOnePhone] = useState(user.ecPhone);
+    const [emergencyContactOneRelation, setEmergencyContactOneRelation] = useState(user.ecRelation);
     
 
-  const _handleRiderFirstName = input => {
-    setRiderFirstName(input);
+  const _handleFirstName = input => {
+    setFirstName(input);
   }
 
-  const _handleRiderLastName = input => {
-    setRiderLastName(input);
+  const _handleLastName = input => {
+    setLastName(input);
   }
-  const _handleRiderEmail = input => {
-    setRiderEmail(input);
-  }
-    const _handleRiderCellPhone = input => {
-        setRiderCellPhone(input);
-    }
-
-    const _handleParentOneFirstName = input => {
-        setParentOneFirstName(input);
-    }
-    const _handleParentOneLastName = input => {
-        setParentOneLastName(input);
-    }
-
-    const _handleParentOneCellPhone = input => {
-      setParentOneCellPhone(input);
-  }
-
-  const _handleParentOneHomePhone = input => {
-    setParentOneHomePhone(input);
-}
-
   const _handleEmail = input => {
     setEmail(input);
   }
-
-    const _handleParentTwoFirstName = input => {
-        setParentTwoFirstName(input);
-    }
-    const _handleParentTwoLastName = input => {
-        setParentTwoLastName(input);
-    }
-    const _handleParentTwoCellPhone = input => {
-        setParentTwoCellPhone(input);
-    }
-    const _handleParentTwoHomePhone = input => {
-        setParentTwoHomePhone(input);
-    }
+  const _handlePassword = (input) => {
+    setPassword(input);
+  };
+  const _handleAddress1 = (input) => {
+    setAddress1(input);
+  };
+  const _handleAddress2 = (input) => {
+    setAddress2(input);
+  };
+  const _handleCity = (input) => {
+    setCity(input);
+  };
+  const _handleState = (input) => {
+    setState(input);
+  };
+  const _handleCounty = (input) => {
+    setCounty(input);
+  };
+  const _handleZip = (input) => {
+    setZip(input);
+  };
+  const _handlePhone = (input) => {
+    setPhone(input);
+  };
+  const _handleGender = (input) => {
+    setGender(input);
+  };
+  const _handleRace = (input) => {
+    setRace(input);
+  };
+  const _handleEthnicity = (input) => {
+    setEthnicity(input);
+  };
 
     const _handleEmergencyContactOneFirstName = input => {
       setEmergencyContactOneFirstName(input);
@@ -149,111 +136,41 @@ const UserProfile = ({user, setUser, setProfilePicture, profilePicture}) =>{
       setEmergencyContactOneLastName(input);
     }
   
-    const _handleEmergencyContactOneCellPhone = input => {
-      setEmergencyContactOneCellPhone(input);
+    const _handleEmergencyContactOnePhone = input => {
+      setEmergencyContactOnePhone(input);
     }
   
-    const _handleEmergencyContactOneHomePhone = input => {
-      setEmergencyContactOneHomePhone(input);
+    const _handleEmergencyContactOneRelation = input => {
+      setEmergencyContactOneRelation(input);
     }
-
-    const _handleEmergencyContactTwoFirstName = input => {
-        setEmergencyContactTwoFirstName(input);
-      }
-    
-      const _handleEmergencyContactTwoLastName = input => {
-        setEmergencyContactTwoLastName(input);
-      }
-    
-      const _handleEmergencyContactTwoCellPhone = input => {
-        setEmergencyContactTwoCellPhone(input);
-      }
-    
-      const _handleEmergencyContactTwoHomePhone = input => {
-        setEmergencyContactTwoHomePhone(input);
-      }
-
-      const _handleInsuranceProvider = input => {
-        setInsuranceProvider(input);
-      }
-    
-      const _handleInsurancePolicyNumber = input => {
-        setInsurancePolicyNumber(input);
-      }
-    
-      const _handleInsuranceGroup = input => {
-        setInsuranceGroup(input);
-      }
-
-      const _handleIbReleaseRadio = e => {
-        setIbReleaseRadio(e.target.value);
-      }
  
 
     const _handleSubmit = async (e) => {
         e.preventDefault();
         
-        let ib;
-        if (ibReleaseRadio === 'true') {
-          ib = true;
-        } else {
-          ib = false
-        }
           let data = {
-            firstName: parentOneFirstName,
-            lastName: parentOneLastName,
-            email: email,
-            parentForm: {
-              rider: {
-                firstName: riderFirstName,
-                lastName: riderLastName,
-                email: riderEmail,
-                phone: {
-                  cell: riderCellPhone
-                }
-              },
-              parentOne: {
-                firstName: parentOneFirstName, 
-                lastName: parentOneLastName, 
-                phone: {
-                  cell: parentOneCellPhone,
-                  home: parentOneHomePhone
-                }
-              },
-              parentTwo: {
-                firstName: parentTwoFirstName,
-                lastName: parentTwoLastName,
-                phone: {
-                  cell: parentTwoCellPhone,
-                  home: parentTwoHomePhone
-                }
-              },
-              emergencyContactOne: {
-                firstName: emergencyContactOneFirstName,
-                lastName: emergencyContactOneLastName,
-                phone: {
-                  cell: emergencyContactOneCellPhone,
-                  home: emergencyContactOneHomePhone
-                }
-              },
-              emergencyContactTwo: {
-                firstName: emergencyContactTwoFirstName,
-                lastName: emergencyContactTwoLastName,
-                phone: {
-                  cell: emergencyContactTwoCellPhone,
-                  home: emergencyContactTwoHomePhone
-                }
-              },
-              insurance: {
-                provider: insuranceProvider,
-                group: insuranceGroup,
-                number: insurancePolicyNumber
-              },
-              ibuprofenRelease: ib,
-            }
-          }
+            fname: FirstName,
+            lname: LastName,
+            email: Email,
+            password: password,
+            address1: address1,
+            address2: address2,
+            city: city,
+            state: state,
+            zip: zip,
+            county: county,
+            phone: Phone,
+            gender: gender,
+            dob: dob,
+            race: race,
+            ethnicity: ethnicity,
+            ecFirstName: emergencyContactOneFirstName,
+            ecLastName: emergencyContactOneLastName,
+            ecPhone: emergencyContactOnePhone,
+            ecRelation: emergencyContactOneRelation
+          };
           
-        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/update/${user._id}`, {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/update/${user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type' : 'application/json' },
             body: JSON.stringify(data)
@@ -270,290 +187,149 @@ const UserProfile = ({user, setUser, setProfilePicture, profilePicture}) =>{
     
 
     return (
-        <>
-          <Typography variant="h2">
-            Profile
-          </Typography>
-            {/* pulls info in from completed form, editable and updates db when changed */}
-            <div>
-            <Avatar src={user.avatarUrl} name={user.parentForm.rider.firstName + ' ' + user.parentForm.rider.lastName}size="105" round /> 
-                <form className={classes.root} validation autoComplete="off" onSubmit={e => _handleSubmit(e)}>
-                <Container className={classes.upload}>
-                {!!updateProfilePicture ? <UploadPhoto user={user} setUser={setUser} setProfilePicture={setProfilePicture} setUpdateProfilePicture={setUpdateProfilePicture}/> : (<Button className={classes.picButton} onClick={setUpdateProfilePicture}>Change Profile Pic</Button>)} 
-                </Container>                 
+      <>
+        <Typography variant="h2">Profile</Typography>
+        {/* pulls info in from completed form, editable and updates db when changed */}
+        <div>
+          <Avatar
+            src={user.avatarUrl}
+            name={user.fname + " " + user.lname}
+            size="105"
+            round
+          />
+          <form
+            className={classes.root}
+            validation
+            autoComplete="off"
+            onSubmit={(e) => _handleSubmit(e)}
+          >
+            {/* <Container className={classes.upload}>
+              {!!updateProfilePicture ? (
+                <UploadPhoto
+                  user={user}
+                  setUser={setUser}
+                  setProfilePicture={setProfilePicture}
+                  setUpdateProfilePicture={setUpdateProfilePicture}
+                />
+              ) : (
+                <Button
+                  className={classes.picButton}
+                  onClick={setUpdateProfilePicture}
+                >
+                  Change Profile Pic
+                </Button>
+              )}
+            </Container> */}
 
-
-
-          <Container component='RiderInformation'>
-            <Section>
-              <Title>
-                <h2>Rider Information</h2>
-              </Title>
-              <Detail>
-                <TextField
+            <Container component="RiderInformation">
+              <Section>
+                <Title>
+                  <h2>User Information</h2>
+                </Title>
+                <Detail>
+                  <TextField
                     required
                     id="riderFirstName"
                     label="Rider First Name"
-                    defaultValue={riderFirstName}
+                    defaultValue={FirstName}
                     variant="outlined"
-                    onChange={e => _handleRiderFirstName(e.target.value)}
-                />
-                <TextField
+                    onChange={(e) => _handleFirstName(e.target.value)}
+                  />
+                  <TextField
                     required
                     id="riderLastName"
                     label="Rider last Name"
-                    defaultValue={riderLastName}
+                    defaultValue={LastName}
                     variant="outlined"
-                    onChange={e => _handleRiderLastName(e.target.value)}
-                />
-                <TextField
+                    onChange={(e) => _handleLastName(e.target.value)}
+                  />
+                  <TextField
                     id="riderEmail"
                     label="Rider Email"
-                    defaultValue={riderEmail}
+                    defaultValue={Email}
                     variant="outlined"
-                    onChange={e => _handleRiderEmail(e.target.value)}
-                />
-                <TextField
+                    onChange={(e) => _handleEmail(e.target.value)}
+                  />
+                  <TextField
                     id="riderCellPhone"
                     label="Rider Cell Phone"
-                    defaultValue={riderCellPhone}
+                    defaultValue={Phone}
                     variant="outlined"
-                    onChange={e => _handleRiderCellPhone(e.target.value)}
-                />
-              </Detail>
-              </Section>
-          </Container>
-
-
-
-          <Container component='ParentOneInformation' className={classes.marginTop}>
-              <Section>
-              <Title>
-                <h2>Account/Parent One Information</h2>
-              </Title>
-              <Detail>
-                <TextField
-                    required
-                    id="parentOneFirstName"
-                    label="Parent One First Name"
-                    defaultValue={parentOneFirstName}
-                    variant="outlined"
-                    onChange={e => _handleParentOneFirstName(e.target.value)}
-                />
-                <TextField
-                    required
-                    id="parentOneLastName"
-                    label="Parent One Last Name"
-                    defaultValue={parentOneLastName}
-                    variant="outlined"
-                    onChange={e => _handleParentOneLastName(e.target.value)}
-                />
-                <TextField
-                    required
-                    id="parentOneCellPhone"
-                    label="Parent One Cell Phone"
-                    defaultValue={parentOneCellPhone}
-                    variant="outlined"
-                    onChange={e => _handleParentOneCellPhone(e.target.value)}
-                />
-              <TextField
-                  id="parentOneHomePhone"
-                  label="Parent One Home Phone"
-                  defaultValue={parentOneHomePhone}
-                  variant="outlined"
-                  onChange={e => _handleParentOneHomePhone(e.target.value)}
-              />
-              <TextField
-                    required
-                    id="parentOneEmail"
-                    label="Account Email"
-                    defaultValue={email}
-                    variant="outlined"
-                    onChange={e => _handleEmail(e.target.value)}
-                />
-            </Detail>
-            </Section>
-        </Container>
-
-        <Container component='ParentTwoInformation' className={classes.marginTop}>
-          <Section>
-            <Title>
-              <h2>Parent Two Information</h2>
-            </Title>
-            <Detail>
-              <TextField
-                  id="parentTwoFirstName"
-                  label="Parent Two First Name"
-                  defaultValue={parentTwoFirstName}
-                  variant="outlined"
-                  onChange={e => _handleParentTwoFirstName(e.target.value)}
-              />
-              <TextField
-                  id="parentTwoLastName"
-                  label="Parent Two Last Name"
-                  defaultValue={parentTwoLastName}
-                  variant="outlined"
-                  onChange={e => _handleParentTwoLastName(e.target.value)}
+                    onChange={(e) => _handlePhone(e.target.value)}
                   />
-              <TextField
-                  id="parentTwoCellPhone"
-                  label="Paren Two Cell Phone"
-                  defaultValue={parentTwoCellPhone}
-                  variant="outlined"
-                  onChange={e => _handleParentTwoCellPhone}
-              />
-              <TextField
-                  id="parentTwoHomePhone"
-                  label="Parent Two Home Phone"
-                  defaultValue={parentTwoHomePhone}
-                  variant="outlined"
-                  onChange={e => _handleParentTwoHomePhone(e.target.value)}
-              />
-            </Detail>
-          </Section>
-        </Container>
+                </Detail>
+              </Section>
+            </Container>
 
-        <Container component="Emergencycontact" className={classes.marginTop}>
-          <Section>
-            <Title>
-              <h2>Emergency Contact One</h2>
-            </Title>
-            <Detail>
-              <TextField
-                  required
-                  id="emergencyContactFirstName"
-                  label="Emergency Contact First Name"
-                  defaultValue={emergencyContactOneFirstName}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactOneFirstName(e.target.value)}
-                />
+            <Container
+              component="Emergencycontact"
+              className={classes.marginTop}
+            >
+              <Section>
+                <Title>
+                  <h2>Emergency Contact</h2>
+                </Title>
+                <Detail>
+                  <TextField
+                    required
+                    id="emergencyContactFirstName"
+                    label="Emergency Contact First Name"
+                    defaultValue={emergencyContactOneFirstName}
+                    variant="outlined"
+                    onChange={(e) =>
+                      _handleEmergencyContactOneFirstName(e.target.value)
+                    }
+                  />
 
-              <TextField
-                  required
-                  id="emergencyContactLastName"
-                  label="Emergency Contact Last Name"
-                  defaultValue={emergencyContactOneLastName}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactOneLastName(e.target.value)}
-                />
+                  <TextField
+                    required
+                    id="emergencyContactLastName"
+                    label="Emergency Contact Last Name"
+                    defaultValue={emergencyContactOneLastName}
+                    variant="outlined"
+                    onChange={(e) =>
+                      _handleEmergencyContactOneLastName(e.target.value)
+                    }
+                  />
 
-              <TextField
-                  id="parentOneCellPhone"
-                  label="Parent One Cell Phone"
-                  defaultValue={parentOneCellPhone}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactOneCellPhone(e.target.value)}
-                />
+                  <TextField
+                    id="ecPhone"
+                    label="Emergency Contact Phone"
+                    defaultValue={emergencyContactOnePhone}
+                    variant="outlined"
+                    onChange={(e) =>
+                      _handleEmergencyContactOnePhone(e.target.value)
+                    }
+                  />
 
-              <TextField
-                  id="emergencyContactOneHomePhone"
-                  label="Emergency Contact One Home Phone"
-                  defaultValue={emergencyContactOneHomePhone}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactOneHomePhone(e.target.value)}
-                />
-            </Detail>
-          </Section>
-        </Container>
+                  <TextField
+                    id="ecRelation"
+                    label="Emergency Contact Relationship"
+                    defaultValue={emergencyContactOneRelation}
+                    variant="outlined"
+                    onChange={(e) =>
+                      _handleEmergencyContactOneRelation(e.target.value)
+                    }
+                  />
+                </Detail>
+              </Section>
+            </Container>
 
-        <Container component="Emergencycontact" className={classes.marginTop}>
-          <Section>
-            <Title>
-              <h2>Emergency Contact Two</h2>
-            </Title>
-            <Detail>
-              <TextField
-                  id="emergencyContactTwoFirstName"
-                  label="Emergency Contact Two First Name"
-                  defaultValue={emergencyContactTwoFirstName}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactTwoFirstName(e.target.value)}
-                />
-
-              <TextField
-                  id="emergencyContactTwoLastName"
-                  label="Emergency Contact Two Last Name"
-                  defaultValue={emergencyContactTwoLastName}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactTwoLastName(e.target.value)}
-                />
-
-              <TextField
-                  id="emergencyContactTwoCellPhone"
-                  label="Emergency Contact Two Cell Phone"
-                  defaultValue={emergencyContactTwoCellPhone}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactTwoCellPhone(e.target.value)}
-                />
-
-              <TextField
-                  id="emergencyContactHomePhone"
-                  label="Emergency Contact Two Home Phone"
-                  defaultValue={emergencyContactTwoHomePhone}
-                  variant="outlined"
-                  onChange={e => _handleEmergencyContactTwoHomePhone(e.target.value)}
-                />
-            </Detail>
-          </Section>
-        </Container>
-
-        <Container component='Insurance' className={classes.marginTop}>
-          <Section> 
-            <Title>
-              <h2>Insurance Information</h2>
-            </Title>
-            <Detail>
-              <TextField
-                  required
-                  id="insuranceProvider"
-                  label="Insurance Provider"
-                  defaultValue={insuranceProvider}
-                  variant="outlined"
-                  onChange={e => _handleInsuranceProvider(e.target.value)}
-                />
-              <TextField
-                  required
-                  id="policyNumber"
-                  label="Policy Number"
-                  defaultValue={insurancePolicyNumber}
-                  variant="outlined"
-                  onChange={e => _handleInsurancePolicyNumber(e.target.value)}
-                />
-              <TextField
-                  required
-                  id="insuranceGroup"
-                  label="Group"
-                  defaultValue={insuranceGroup}
-                  variant="outlined"
-                  onChange={e => _handleInsuranceGroup(e.target.value)}
-                />
-            </Detail>
-          </Section>
-        </Container>
-        <Container>
-        <Section>
-        <Title>
-              <h2>Ibuprofen Release</h2>
-        </Title>
-        <Detail>
-          <FormControl component="fieldset" className={classes.form}>
-            <FormLabel component="legend"></FormLabel>
-              <RadioGroup aria-label="ibReleaseRadio" name="ibRelease" value={ibReleaseRadio} onChange={e => _handleIbReleaseRadio(e)}>
-              <FormControlLabel value="false" control={<Radio />} label="No" />
-              <FormControlLabel value="true" control={<Radio />} label="Yes" />
-            </RadioGroup>
-          </FormControl>
-          </Detail>
-          </Section>
-          <Button size="large" variant="contained" className={classes.margin} color="primary" type="submit">
-            Save 
-          </Button>
-          
-          </Container>
+            <Container>
+              <Button
+                size="large"
+                variant="contained"
+                className={classes.margin}
+                color="primary"
+                type="submit"
+              >
+                Save
+              </Button>
+            </Container>
           </form>
-      </div>      
-    </>
-  );
+        </div>
+      </>
+    );
 }
 
 export default UserProfile;

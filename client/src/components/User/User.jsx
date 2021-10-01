@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import Avatar from 'react-avatar';
 //MUI Core, labs, and styles
@@ -22,6 +22,7 @@ import UserDocuments from './UserDocuments';
 import UserTeamList from "./UserTeamList";
 //styles
 import styled from 'styled-components';
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 const BreadcrumbWrapper = styled.div`
   background-color: #FFBA00;
@@ -191,25 +192,29 @@ const useStyles = makeStyles((theme) => ({
 const User = (props) => {
     const { user, setUser } = props;
     const classes = useStyles();
-    const [profilePicture, setProfilePicture] = useState(user.avatarUrl)
-    const [groupView, setGroupView] = useState(false);
-    const [numberView, setNumberView] = useState(false);
-    
-    const _handleViewClick =() =>{
-      setGroupView(groupView ? false : true);
-    };
+  const [profilePicture, setProfilePicture] = useState(user.avatarUrl)
+  
+  console.log("user", user)
 
-  const _handleViewClick2 =() =>{
-      setNumberView(numberView ? false : true);
-    };
+  useEffect(() => {
+    console.log("userID", user.id)
+    // const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/form/${user.id}`, {
+    //   method: "GET",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(data),
+    // });
+    
+    })
+    
+    
 
   return (
     <>
       <Switch>
 
         <Route exact path="/user">
-        <h1>Welcome to SquadMate {user.firstName}!</h1>
-        {!!user.formDue ? (
+        <h1>Welcome {user.fname}!</h1>
+        {!!user.formDue || user.ecFirstName === "" ? (
           <Alert 
             className={classes.alert}
             variant="filled"
@@ -248,26 +253,7 @@ const User = (props) => {
                 <CardContent>
                 
                 <p></p>
-                <Paper className='paper'>
-                    <Title className="blue">
-                        <Typography variant='h5'>
-                            Parent Two:
-                        </Typography>
-                    </Title>
-                    <Detail>
-                        <Typography variant='h6'>
-                        {user.parentForm.parentTwo.firstName} {user.parentForm.parentTwo.lastName}
-                        </Typography>
-                        <Chip className={classes.chip}
-                        icon={<PhoneAndroidIcon />}
-                        label={user.parentForm.parentTwo.phone.cell}
-                        />
-                        <Chip className={classes.chip}
-                        icon={<PhoneIcon />}
-                        label={user.parentForm.parentTwo.phone.home}
-                        />
-                    </Detail>
-                </Paper>
+                
                 <p></p>
                 </CardContent>
                 <CardContent>
