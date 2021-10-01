@@ -11,6 +11,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { useHistory } from "react-router-dom";
 import { MenuItem } from "@material-ui/core";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DatePicker from "@mui/lab/DatePicker";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -415,6 +418,47 @@ export default function SignUp(props) {
                 <MenuItem value="Hispanic">Hispanic</MenuItem>
                 <MenuItem value="Non-Hispanic">Non-Hispanic</MenuItem>
               </TextField>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="gender"
+                label="Gender"
+                type="text"
+                id="gender"
+                autoComplete="gender"
+                onChange={(e) => _handleGender(e.target.value)}
+                value={gender}
+                select
+              >
+                <MenuItem value="Male">Male</MenuItem>
+                <MenuItem value="Female">Female</MenuItem>
+                <MenuItem value="Non-Binary">Non-Binary</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  disableFuture
+                  label="Date of Birth"
+                  openTo="year"
+                  views={["year", "month", "day"]}
+                  value={dob}
+                  onChange={(e) => _handleDOB(e.target.value)}
+                  renderInput={(params) => (
+                    <TextField
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="dob"
+                      id="dob"
+                      {...params}
+                    />
+                  )}
+                />
+              </LocalizationProvider>
             </Grid>
             {/* <Grid item xs={12}>
               <FormControlLabel

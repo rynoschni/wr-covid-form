@@ -29,7 +29,6 @@ router.get('/:id', async (req, res) => {
 // Create User
 router.post('/', async (req, res) => {
     const { email, password, fname, lname, address1, address2, city, state, zip, phone, race, ethnicity } = req.body
-    let userPassword = password
     
     const hashPassword = bcrypt.hashSync(password, salt);
     console.log("Hashed Pw", hashPassword)
