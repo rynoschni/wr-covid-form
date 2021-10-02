@@ -56,20 +56,20 @@ const Title = styled.div`
 
 const images = [
   {
-    url: '/userProfile.jpg',
+    url: '/editProfile.jpg',
     title: 'Edit Profile',
     width: '33%',
     href: '/user/profile'
   },
   {
-    url: '/userTeam.jpg',
-    title: 'Team',
+    url: '/Form.png',
+    title: 'COVID Form',
     width: '33%',
-    href: '/user/team'
+    href: '/user/form'
   },
   {
     url: '/documentsInfo.jpg',
-    title: 'Documents & Info',
+    title: 'Past Forms & Results',
     width: '33%',
     href: '/user/info',
 },
@@ -205,152 +205,179 @@ const User = (props) => {
   return (
     <>
       <Switch>
-
         <Route exact path="/user">
-        <h1>Welcome {user.fname}!</h1>
-        {!!user.formDue || user.ecFirstName === "" ? (
-          <Alert 
-            className={classes.alert}
-            variant="filled"
-            severity="error"
-          >
-            Critical Profile Items Missing
-          <br />
-          {!!user.formDue ? <Link to='/user/forms'>Emergency Contact Form</Link> : "" }
-          </Alert>
-        ) : "" }
-        <div>
-          
-          <Card key={user._id} variant="outlined">
-            <CardContent>
-              <Paper className='paper'>
+          <h1>Welcome {user.fname}!</h1>
+          {!!user.formDue || user.ecFirstName === "" ? (
+            <Alert className={classes.alert} variant="filled" severity="error">
+              Critical Profile Items Missing
+              <br />
+              {!!user.formDue ? (
+                <Link to="/user/forms">Emergency Contact Form</Link>
+              ) : (
+                ""
+              )}
+            </Alert>
+          ) : (
+            ""
+          )}
+          <div>
+            <Card key={user._id} variant="outlined">
+              <CardContent>
+                <Paper className="paper">
                   <Title className="blue">
-                        <Typography variant='h5'>
-                            Rider:
-                        </Typography>
-                    </Title>
-                  <Avatar src={user.avatarUrl} name={user.fname + ' ' + user.lname}size="105" round />
-                  <Typography variant='h4'>
-                      {user.fname + " " + user.lname}
+                    <Typography variant="h5">User Info:</Typography>
+                  </Title>
+                  <Avatar
+                    src={user.avatarUrl}
+                    name={user.fname + " " + user.lname}
+                    size="105"
+                    round
+                  />
+                  <Typography variant="h4">
+                    {user.fname + " " + user.lname}
                   </Typography>
-                  <Chip className={classes.chip}
-                  icon={<PhoneAndroidIcon />}
-                  label={user.phone}
+                  <Chip
+                    className={classes.chip}
+                    icon={<PhoneAndroidIcon />}
+                    label={user.phone}
                   />
-                  <Chip className={classes.chip}
-                  icon={<AlternateEmailIcon />}
-                  label={user.email}
+                  <Chip
+                    className={classes.chip}
+                    icon={<AlternateEmailIcon />}
+                    label={user.email}
                   />
                 </Paper>
-                </CardContent>
+              </CardContent>
+              <p></p>
+              <CardContent>
                 <p></p>
-                <CardContent>
-                
-                <p></p>
-                
-                <p></p>
-                </CardContent>
-                <CardContent>
-                <Paper className='paper'>
-                    <Title className="blue">
-                        <Typography variant='h5'>
-                            Emergency Information:
-                        </Typography>
-                    </Title>
-                    
-                </Paper>
-            </CardContent>
-        </Card>
 
-        </div>
-        
-        <div className={classes.root}>
-        {images.map((image) => (
-          <ButtonBase
-            focusRipple
-            key={image.title}
-            className={classes.image}
-            focusVisibleClassName={classes.focusVisible}
-            style={{
-              width: image.width,
-            }}
-          >
-          <Link to={image.href}>
-          <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage: `url(${image.url})`,
-            }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-          </Link>
-        </ButtonBase>
-      ))}
-    </div>
+                <p></p>
+              </CardContent>
+              <CardContent>
+                <Paper className="paper">
+                  <Title className="blue">
+                    <Typography variant="h5">Emergency Contact Information:</Typography>
+                  </Title>
+                  <Typography variant="h4">
+                    {user.ecFirstName + " " + user.ecLastName}
+                  </Typography>
+                  <Chip
+                    className={classes.chip}
+                    icon={<PhoneAndroidIcon />}
+                    label={user.ecPhone}
+                  />
+                  <Chip
+                    className={classes.chip}
+                    icon={<GroupIcon />}
+                    label={user.ecRelation}
+                  />
+                </Paper>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className={classes.root}>
+            {images.map((image) => (
+              <ButtonBase
+                focusRipple
+                key={image.title}
+                className={classes.image}
+                focusVisibleClassName={classes.focusVisible}
+                style={{
+                  width: image.width,
+                }}
+              >
+                <Link to={image.href}>
+                  <span
+                    className={classes.imageSrc}
+                    style={{
+                      backgroundImage: `url(${image.url})`,
+                    }}
+                  />
+                  <span className={classes.imageBackdrop} />
+                  <span className={classes.imageButton}>
+                    <Typography
+                      component="span"
+                      variant="subtitle1"
+                      color="inherit"
+                      className={classes.imageTitle}
+                    >
+                      {image.title}
+                      <span className={classes.imageMarked} />
+                    </Typography>
+                  </span>
+                </Link>
+              </ButtonBase>
+            ))}
+          </div>
         </Route>
 
-            <Route path="/user/profile">
-              <BreadcrumbWrapper>
-                <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                  <Link className={classes.link} to="/user">
-                    <HomeIcon className={classes.icon} />
-                    User Home
-                  </Link>
-                  <Typography color="textPrimary">
-                    <AccountCircleIcon className={classes.icon} />
-                    Account Profile</Typography>
-                </Breadcrumbs>
-              </BreadcrumbWrapper>
-              <UserProfile user={user} setUser={setUser} setProfilePicture={setProfilePicture} profilePicture={profilePicture}/>
-            </Route>
+        <Route path="/user/profile">
+          <BreadcrumbWrapper>
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              <Link className={classes.link} to="/user">
+                <HomeIcon className={classes.icon} />
+                User Home
+              </Link>
+              <Typography color="textPrimary">
+                <AccountCircleIcon className={classes.icon} />
+                Account Profile
+              </Typography>
+            </Breadcrumbs>
+          </BreadcrumbWrapper>
+          <UserProfile
+            user={user}
+            setUser={setUser}
+            setProfilePicture={setProfilePicture}
+            profilePicture={profilePicture}
+          />
+        </Route>
 
-            <Route path="/user/forms">
-                <InitialForm user={user} setUser={setUser}/>
-            </Route>
-            
-            <Route path="/user/team">
-              <BreadcrumbWrapper>
-                <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                  <Link className={classes.link} to="/user">
-                    <HomeIcon className={classes.icon} />
-                    User Home
-                  </Link>
-                  <Typography color="textPrimary">
-                  <GroupIcon className={classes.icon} />
-                    Team users
-                    </Typography>
-                </Breadcrumbs>
-              </BreadcrumbWrapper>
-              <UserTeamList />
-            </Route>
+        <Route path="/user/form">
+          <InitialForm user={user} setUser={setUser} />
+        </Route>
 
-            <Route path="/user/info">
-              <BreadcrumbWrapper>
-                <Breadcrumbs separator={<NavigateNextIcon fontSize="small" />} aria-label="breadcrumb">
-                  <Link className={classes.link} to="/user">
-                    <HomeIcon className={classes.icon} />
-                    User Home
-                  </Link>
-                  <Typography color="textPrimary">
-                  <AssignmentIcon className={classes.icon} />
-                    Documents and Forms
-                    </Typography>
-                </Breadcrumbs>
-              </BreadcrumbWrapper>
-              <UserDocuments user={user}/>
-            </Route>
+        <Route path="/user/team">
+          <BreadcrumbWrapper>
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              <Link className={classes.link} to="/user">
+                <HomeIcon className={classes.icon} />
+                User Home
+              </Link>
+              <Typography color="textPrimary">
+                <GroupIcon className={classes.icon} />
+                Team users
+              </Typography>
+            </Breadcrumbs>
+          </BreadcrumbWrapper>
+          <UserTeamList />
+        </Route>
 
+        <Route path="/user/info">
+          <BreadcrumbWrapper>
+            <Breadcrumbs
+              separator={<NavigateNextIcon fontSize="small" />}
+              aria-label="breadcrumb"
+            >
+              <Link className={classes.link} to="/user">
+                <HomeIcon className={classes.icon} />
+                User Home
+              </Link>
+              <Typography color="textPrimary">
+                <AssignmentIcon className={classes.icon} />
+                Documents and Forms
+              </Typography>
+            </Breadcrumbs>
+          </BreadcrumbWrapper>
+          <UserDocuments user={user} />
+        </Route>
       </Switch>
     </>
   );

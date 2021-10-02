@@ -47,119 +47,80 @@ function Forms({user, setUser}) {
   const history = useHistory();
 
 
-  const [riderFirstName, setRiderFirstName] = useState(user.parentForm.rider.firstName);
-  const [riderLastName, setRiderLastName] = useState(user.parentForm.rider.lastName);
-  const [emergencyContactOneFirstName, setEmergencyContactOneFirstName] = useState(user.parentForm.emergencyContactOne.firstName);
-  const [emergencyContactOneLastName, setEmergencyContactOneLastName] = useState(user.parentForm.emergencyContactOne.lastName);
-  const [emergencyContactOneCellPhone, setEmergencyContactOneCellPhone] = useState(user.parentForm.emergencyContactOne.phone.cell);
-  const [emergencyContactOneHomePhone, setEmergencyContactOneHomePhone] = useState(user.parentForm.emergencyContactOne.phone.home);
-  const [insuranceProvider, setInsuranceProvider] = useState(user.insurance.provider);
-  const [insurancePolicyNumber, setInsurancePolicyNumber] = useState(user.insurance.number);
-  const [insuranceGroup, setInsuranceGroup] = useState(user.insurance.group);
-  const [ibReleaseRadio, setIbReleaseRadio] = useState(String(user.ibuprofenRelease));
-
-  const _handleRiderFirstName = input => {
-    setRiderFirstName(input);
-  }
-
-  const _handleRiderLastName = input => {
-    setRiderLastName(input);
-  }
-
-  const _handleEmergencyContactOneFirstName = input => {
-    setEmergencyContactOneFirstName(input);
-  }
-
-  const _handleEmergencyContactOneLastName = input => {
-    setEmergencyContactOneLastName(input);
-  }
-
-  const _handleEmergencyContactOneCellPhone = input => {
-    setEmergencyContactOneCellPhone(input);
-  }
-
-  const _handleEmergencyContactOneHomePhone = input => {
-    setEmergencyContactOneHomePhone(input);
-  }
-
-  const _handleInsuranceProvider = input => {
-    setInsuranceProvider(input);
-  }
-
-  const _handleInsurancePolicyNumber = input => {
-    setInsurancePolicyNumber(input);
-  }
-
-  const _handleInsuranceGroup = input => {
-    setInsuranceGroup(input);
-  }
-
-  const _handleIbReleaseRadio = e => {
-    setIbReleaseRadio(e.target.value);
-  }
-
+  const [question1, setQuestion1] = useState("");
+  const [question2, setQuestion2] = useState("");
+  const [question3, setQuestion3] = useState("");
+  const [question4, setQuestion4] = useState("");
+  const [question5, setQuestion5] = useState("");
+  const [question6, setQuestion6] = useState("");
+  const [question7, setQuestion7] = useState("");
+  const [question8, setQuestion8] = useState("");
+  const [signature1, setSignature1] = useState("");
+  const [signature2, setSignature2] = useState("");
+  const [signature1box, setSignature1Box] = useState("");
+  const [signature2box, setSignature2Box] = useState("");
   
+  const _handleQuestion1 = e => {
+    setQuestion1(e.target.value);
+  };
+  const _handleQuestion2 = (e) => {
+    setQuestion2(e.target.value);
+  };
+  const _handleQuestion3 = (e) => {
+    setQuestion3(e.target.value);
+  };
+  const _handleQuestion4 = (e) => {
+    setQuestion4(e.target.value);
+  };
+  const _handleQuestion5 = (e) => {
+    setQuestion5(e.target.value);
+  };
+  const _handleQuestion6 = (e) => {
+    setQuestion6(e.target.value);
+  };
+  const _handleQuestion7 = (e) => {
+    setQuestion7(e.target.value);
+  };
+  const _handleQuestion8 = (e) => {
+    setQuestion8(e.target.value);
+  };
+  const _handleSignature1 = (e) => {
+    setSignature1(e.target.value);
+  };
+  const _handleSignature1Box = (e) => {
+    setSignature1Box(e.target.value);
+  };
+  const _handleSignature2 = (e) => {
+    setSignature2(e.target.value);
+  };
+  const _handleSignature2Box = (e) => {
+    setSignature2Box(e.target.value);
+  };
+
   const _handleSubmit = async (e) => {
     e.preventDefault();
-    let ib;
-    if (ibReleaseRadio === 'true') {
-      ib = true;
-    } else {
-      ib = false
-    }
+    // let ib;
+    // if (ibReleaseRadio === 'true') {
+    //   ib = true;
+    // } else {
+    //   ib = false
+    // }
 
   let data = {
-    parentForm: {
-      rider: {
-        firstName: riderFirstName,
-        lastName: riderLastName,
-        email: user.parentForm.rider.email,
-        phone: {
-          cell: user.parentForm.rider.phone.cell
-        }
-      },
-      parentOne: {
-        firstName: user.parentForm.parentOne.firstName,
-        lastName: user.parentForm.parentOne.lastName,
-        phone: {
-          cell: emergencyContactOneCellPhone,
-          home: emergencyContactOneHomePhone
-        }
-      },
-      parentTwo: {
-        firstName: user.parentForm.parentTwo.firstName,
-        lastName: user.parentForm.parentTwo.lastName,
-        phone: {
-          cell: user.parentForm.parentTwo.phone.cell,
-          home: user.parentForm.parentTwo.phone.home
-        }
-      },
-      emergencyContactOne: {
-        firstName: emergencyContactOneFirstName,
-        lastName: emergencyContactOneLastName,
-        phone: {
-          cell: emergencyContactOneCellPhone,
-          home: emergencyContactOneHomePhone,
-        }
-      },
-      emergencyContactTwo: {
-        firstName: user.parentForm.emergencyContactTwo.firstName,
-        lastName: user.parentForm.emergencyContactTwo.lastName,
-        phone: {
-          cell: user.parentForm.emergencyContactTwo.phone.cell,
-          home: user.parentForm.emergencyContactTwo.phone.home,
-        }
-      },
-      
-    },
-    insurance: {
-      provider: insuranceProvider,
-      group: insuranceGroup,
-      number: insurancePolicyNumber
-    },
-    ibuprofenRelease: ib,
-    emergencyFormDone: true,
-  }
+    question1,
+    question2,
+    question3,
+    question4,
+    question5,
+    question6,
+    question7,
+    question8,
+    signature1,
+    signature1box,
+    signature2,
+    signature2box,
+    userID: user.id,
+  };
 
   const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/update/${user._id}`, {
         method: 'PUT',
@@ -177,146 +138,80 @@ function Forms({user, setUser}) {
   
 
   return (
-    <form className={classes.root} autoComplete="off" onSubmit={e => _handleSubmit(e)}>
-        <Typography variant="h2">
-            Initial Form
-        </Typography>
-      
+    <form
+      className={classes.root}
+      autoComplete="off"
+      onSubmit={(e) => _handleSubmit(e)}
+    >
+      <Typography variant="h2">Daily COVID Form</Typography>
+
       <div>
-
-        <Container component='riderInfo'>
-        
-        <Section>
-          <Title>
-            <h2>Rider Information</h2>
-          </Title>
-          <Detail>
-          <p className={classes.important}>*  Required</p>
-          <TextField
-              required
-              id="riderFirstName"
-              label="Rider First Name"
-              defaultValue={riderFirstName}
-              variant="outlined"
-              onChange={e => _handleRiderFirstName(e.target.value)}
-            />
-        
-          <TextField
-              required
-              id="riderLastName"
-              label="Rider Last Name"
-              defaultValue={riderLastName}
-              variant="outlined"
-              onChange={e => _handleRiderLastName(e.target.value)}
-            />
+        <Container component="riderInfo">
+          <Section>
+            <Title>
+              <h5>
+                Your safety is our top priority. To that end, we are asking the
+                following health screening questions to ensure a safe work
+                environment. Everyone must answer these questions before they
+                arrive to work.
+              </h5>
+              <h4>
+                <b>
+                  Remember, if you are sick with or exhibiting symptoms of
+                  COVID-19 (fever of 100.4˚ or greater, chills, cough, fever,
+                  difficulty breathing, muscle aches, sore throat, diarrhea,
+                  recent loss of taste or smell), or have had close contact with
+                  someone diagnosed with COVID-19 within the last 14 days, you
+                  must not report to work.
+                </b>
+              </h4>
+            </Title>
+            <Detail>
+              <p className={classes.important}>* Required</p>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend">Question 1:</FormLabel>
+                <FormLabel component="legend">
+                  Have you had close contact with someone who in the past 14
+                  days was diagnosed with COVID-19 or had a test confirming they
+                  have the virus?
+                </FormLabel>
+                <RadioGroup
+                  required
+                  id="riderFirstName"
+                  aria-label="Rider First Name"
+                  value={question1}
+                  onChange={(e) => _handleQuestion1(e.target.value)}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
             </Detail>
-            </Section>
-        </Container>
-
-      <Container component="Emergencycontact" className={classes.marginTop}>
-      <Section>
-          <Title>
-            <h2>Emergency Contact Information</h2>
-          </Title>
-          <Detail>
-      <TextField
-          required
-          id="emergencyContactFirstName"
-          label="Emergency Contact First Name"
-          defaultValue={emergencyContactOneFirstName}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneFirstName(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="emergencyContactLastName"
-          label="Emergency Contact Last Name"
-          defaultValue={emergencyContactOneLastName}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneLastName(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="emergencyContactCell"
-          label="Emergency Contact Cell"
-          defaultValue={emergencyContactOneCellPhone}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneCellPhone(e.target.value)}
-        />
-
-      <TextField
-          id="emergencyContactHome"
-          label="Emergency Contact Home"
-          defaultValue={emergencyContactOneHomePhone}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneHomePhone(e.target.value)}
-        />
-        </Detail>
-</Section>
-</Container>
-
-<Container component='Insurance' className={classes.marginTop}> 
-<Section>
-          <Title>
-            <h2>Emergency Contact Information</h2>
-          </Title>
-          <Detail>
-      <TextField
-          required
-          id="insuranceProvider"
-          label="Insurance Provider"
-          defaultValue={insuranceProvider}
-          variant="outlined"
-          onChange={e => _handleInsuranceProvider(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="policyNumber"
-          label="Policy Number"
-          defaultValue={insurancePolicyNumber}
-          variant="outlined"
-          onChange={e => _handleInsurancePolicyNumber(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="insuranceGroup"
-          label="Group"
-          defaultValue={insuranceGroup}
-          variant="outlined"
-          onChange={e => _handleInsuranceGroup(e.target.value)}
-        />
-        </Detail>
-        </Section>
+          </Section>
         </Container>
 
         <Container>
-        <Section>
-          <Title>
-            <h2>Ibuprofen Release</h2>
-          </Title>
-          <Detail>
-            
-      <FormControl component="fieldset" className={classes.form}>
-        <FormLabel component="legend"></FormLabel>
-        <RadioGroup aria-label="ibReleaseRadio" name="ibRelease" value={ibReleaseRadio} onChange={e => _handleIbReleaseRadio(e)}>
-          <FormControlLabel value="false" control={<Radio />} label="No" />
-          <FormControlLabel value="true" control={<Radio />} label="Yes" />
-        </RadioGroup>
-      </FormControl>
-      </Detail>
-      </Section>
-      </Container>
+          <Section>
+            <Title>
+              <h2>Ibuprofen Release</h2>
+            </Title>
+            <Detail></Detail>
+          </Section>
+        </Container>
 
-
-
-        <Button size="large" variant="contained" className={classes.margin} color="primary" type="submit">
+        <Button
+          size="large"
+          variant="contained"
+          className={classes.margin}
+          color="primary"
+          type="submit"
+        >
           Submit Form
         </Button>
-
       </div>
     </form>
   );
