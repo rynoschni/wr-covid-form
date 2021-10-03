@@ -28,26 +28,29 @@ router.get("/:id/users", async (req, res) => {
 
 // Answer new form
 router.post("/", async (req, res) => {
-  const { question1, question2, question3, question4, question5, question6, question7, question8, signature1, signature1box, signature2, signature2box, userID } = req.body
+  const { question1, question2, question3, question4, question5, q5Location, signature1, signature1box, userID } = req.body
+  try {
+    const form = await prisma.form.create({
+      data: {
+        question1,
+        question2,
+        question3,
+        question4,
+        question5,
+        q5Location,
+        signature1,
+        signature1box,
+        userID,
+      },
+    });
+    console.log("Form",form)
+    res.json(form); 
+  }
+  catch (error) {
+    console.log(error);
+    res.json({ msg: "Sorry, your form was not submitted.  Please try again." });
+  }
   
-  const form = await prisma.form.create({
-    data: {
-      question1,
-      question2,
-      question3,
-      question4,
-      question5,
-      question6,
-      question7,
-      question8,
-      signature1,
-      signature1box,
-      signature2,
-      signature2box,
-      userID,
-    },
-  });
-  res.json({msg: "Your form was submitted!"});
 });
 
 // Delete Team by ID
