@@ -18,7 +18,7 @@ model Form {
   q5Location    String?
   signature1    String?
   signature1box Boolean? @default(false)
-  createdAt     DateTime @default(now()) @db.Timestamp(6)
+  createdAt     DateTime @default(dbgenerated("(now())::date")) @db.Date
   userID        Int
   temp          String?  @db.VarChar
   results       String?

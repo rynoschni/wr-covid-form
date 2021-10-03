@@ -13,10 +13,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const forms = await prisma.form.findMany({
     where: {
-      userID: req.params.id
+      userID: parseInt(req.params.id)
     }
   });
-
+  console.log("forms", forms);
   res.json(forms);
 });
 
