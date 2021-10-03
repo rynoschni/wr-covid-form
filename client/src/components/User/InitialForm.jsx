@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState} from "react";
 import {
   TextField,
   Container,
@@ -9,7 +9,6 @@ import {
   Radio,
   Button,
   Typography,
-  ListItemText,
   Checkbox,
   CircularProgress,
 } from "@material-ui/core";
