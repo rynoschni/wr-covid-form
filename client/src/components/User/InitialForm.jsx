@@ -1,17 +1,31 @@
-import React, {useState} from 'react';
-import { TextField, Container, FormControl, FormLabel, FormControlLabel, RadioGroup, Radio, Button, Typography }  from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState} from "react";
+import {
+  TextField,
+  Container,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  RadioGroup,
+  Radio,
+  Button,
+  Typography,
+  Checkbox,
+  CircularProgress,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
+import SCstyled from "styled-components";
+import { Box, Paper, styled, Grid } from "@mui/material";
+import { green } from "@mui/material/colors";
 
-const Section = styled.div`
+const Section = SCstyled.div`
     background-color: white;
     border-radius: 7px;
     color: black;
     margin: 30px;
 `;
 
-const Title = styled.div`
+const Title = SCstyled.div`
     background-color:  #223F84;
     color: white;
     border-radius: 7px 7px 0 0;
@@ -19,304 +33,444 @@ const Title = styled.div`
     margin: 0;
 `;
 
-const Detail = styled.div`
+const Detail = SCstyled.div`
     padding: 5px 20px;
 `;
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: "#fff",
+  backgroundColor: "#223F84",
+}));
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& .MuiTextField-root': {
+    "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: '40ch',
+      width: "40ch",
     },
   },
   form: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center",
   },
   marginTop: {
-    marginTop: '1rem'
+    marginTop: "1rem",
   },
   important: {
-    color: '#D60808',
-  }
+    color: "#D60808",
+  },
+  question: {
+    color: "#000",
+  },
 }));
 
-function Forms({user, setUser}) {
+function Forms({ user, setUser }) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [question1, setQuestion1] = useState("");
+  const [question2, setQuestion2] = useState("");
+  const [question3, setQuestion3] = useState("");
+  const [question4, setQuestion4] = useState("");
+  const [question5, setQuestion5] = useState("");
+  const [q5Location, setQ5Location] = useState("");
+  const [signature1, setSignature1] = useState("");
+  const [signature1box, setSignature1Box] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const [riderFirstName, setRiderFirstName] = useState(user.parentForm.rider.firstName);
-  const [riderLastName, setRiderLastName] = useState(user.parentForm.rider.lastName);
-  const [emergencyContactOneFirstName, setEmergencyContactOneFirstName] = useState(user.parentForm.emergencyContactOne.firstName);
-  const [emergencyContactOneLastName, setEmergencyContactOneLastName] = useState(user.parentForm.emergencyContactOne.lastName);
-  const [emergencyContactOneCellPhone, setEmergencyContactOneCellPhone] = useState(user.parentForm.emergencyContactOne.phone.cell);
-  const [emergencyContactOneHomePhone, setEmergencyContactOneHomePhone] = useState(user.parentForm.emergencyContactOne.phone.home);
-  const [insuranceProvider, setInsuranceProvider] = useState(user.insurance.provider);
-  const [insurancePolicyNumber, setInsurancePolicyNumber] = useState(user.insurance.number);
-  const [insuranceGroup, setInsuranceGroup] = useState(user.insurance.group);
-  const [ibReleaseRadio, setIbReleaseRadio] = useState(String(user.ibuprofenRelease));
+  const _handleQuestion1 = (e) => {
+    setQuestion1(e.target.value);
+  };
+  const _handleQuestion2 = (e) => {
+    setQuestion2(e.target.value);
+  };
+  const _handleQuestion3 = (e) => {
+    setQuestion3(e.target.value);
+  };
+  const _handleQuestion4 = (e) => {
+    setQuestion4(e.target.value);
+  };
+  const _handleQuestion5 = (e) => {
+    setQuestion5(e.target.value);
+  };
+  const _handleQ5Location = (input) => {
+    setQ5Location(input);
+  };
 
-  const _handleRiderFirstName = input => {
-    setRiderFirstName(input);
-  }
+  const _handleSignature1 = (input) => {
+    setSignature1(input);
+  };
+  const _handleSignature1Box = () => {
+    setSignature1Box(!signature1box);
+  };
 
-  const _handleRiderLastName = input => {
-    setRiderLastName(input);
-  }
-
-  const _handleEmergencyContactOneFirstName = input => {
-    setEmergencyContactOneFirstName(input);
-  }
-
-  const _handleEmergencyContactOneLastName = input => {
-    setEmergencyContactOneLastName(input);
-  }
-
-  const _handleEmergencyContactOneCellPhone = input => {
-    setEmergencyContactOneCellPhone(input);
-  }
-
-  const _handleEmergencyContactOneHomePhone = input => {
-    setEmergencyContactOneHomePhone(input);
-  }
-
-  const _handleInsuranceProvider = input => {
-    setInsuranceProvider(input);
-  }
-
-  const _handleInsurancePolicyNumber = input => {
-    setInsurancePolicyNumber(input);
-  }
-
-  const _handleInsuranceGroup = input => {
-    setInsuranceGroup(input);
-  }
-
-  const _handleIbReleaseRadio = e => {
-    setIbReleaseRadio(e.target.value);
-  }
-
-  
   const _handleSubmit = async (e) => {
     e.preventDefault();
-    let ib;
-    if (ibReleaseRadio === 'true') {
-      ib = true;
-    } else {
-      ib = false
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
     }
 
-  let data = {
-    parentForm: {
-      rider: {
-        firstName: riderFirstName,
-        lastName: riderLastName,
-        email: user.parentForm.rider.email,
-        phone: {
-          cell: user.parentForm.rider.phone.cell
-        }
-      },
-      parentOne: {
-        firstName: user.parentForm.parentOne.firstName,
-        lastName: user.parentForm.parentOne.lastName,
-        phone: {
-          cell: emergencyContactOneCellPhone,
-          home: emergencyContactOneHomePhone
-        }
-      },
-      parentTwo: {
-        firstName: user.parentForm.parentTwo.firstName,
-        lastName: user.parentForm.parentTwo.lastName,
-        phone: {
-          cell: user.parentForm.parentTwo.phone.cell,
-          home: user.parentForm.parentTwo.phone.home
-        }
-      },
-      emergencyContactOne: {
-        firstName: emergencyContactOneFirstName,
-        lastName: emergencyContactOneLastName,
-        phone: {
-          cell: emergencyContactOneCellPhone,
-          home: emergencyContactOneHomePhone,
-        }
-      },
-      emergencyContactTwo: {
-        firstName: user.parentForm.emergencyContactTwo.firstName,
-        lastName: user.parentForm.emergencyContactTwo.lastName,
-        phone: {
-          cell: user.parentForm.emergencyContactTwo.phone.cell,
-          home: user.parentForm.emergencyContactTwo.phone.home,
-        }
-      },
-      
-    },
-    insurance: {
-      provider: insuranceProvider,
-      group: insuranceGroup,
-      number: insurancePolicyNumber
-    },
-    ibuprofenRelease: ib,
-    emergencyFormDone: true,
-  }
+    let data = {
+      question1,
+      question2,
+      question3,
+      question4,
+      question5,
+      q5Location,
+      signature1,
+      signature1box,
+      userID: user.id,
+    };
 
-  const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/update/${user._id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type' : 'application/json' },
-        body: JSON.stringify(data)
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/covid-form`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
 
     const resdata = await response.json();
-    setUser(resdata);
-    history.push('/user');
-  }
+    console.log("response", resdata);
 
-    
-    
-  
+    if (resdata.msg) {
+      setLoading(false);
+      setMessage(resdata.msg);
+    } else {
+      setLoading(false);
+      setMessage("Your form was submitted!");
+      setSuccess(true);
+
+      history.push("/user");
+    }
+  };
 
   return (
-    <form className={classes.root} autoComplete="off" onSubmit={e => _handleSubmit(e)}>
-        <Typography variant="h2">
-            Initial Form
+    <form
+      className={classes.root}
+      autoComplete="off"
+      onSubmit={(e) => _handleSubmit(e)}
+    >
+      <Typography variant="h2">Daily COVID-19 Screening Form</Typography>
+      <Container component="formInfo">
+        <Typography variant="h5">
+          Your safety is our top priority. To that end, we are asking the
+          following health screening questions to ensure a safe work
+          environment. Everyone must answer these questions before they arrive
+          to work.
         </Typography>
-      
-      <div>
-
-        <Container component='riderInfo'>
-        
-        <Section>
-          <Title>
-            <h2>Rider Information</h2>
-          </Title>
-          <Detail>
-          <p className={classes.important}>*  Required</p>
-          <TextField
-              required
-              id="riderFirstName"
-              label="Rider First Name"
-              defaultValue={riderFirstName}
-              variant="outlined"
-              onChange={e => _handleRiderFirstName(e.target.value)}
-            />
-        
-          <TextField
-              required
-              id="riderLastName"
-              label="Rider Last Name"
-              defaultValue={riderLastName}
-              variant="outlined"
-              onChange={e => _handleRiderLastName(e.target.value)}
-            />
-            </Detail>
-            </Section>
-        </Container>
-
-      <Container component="Emergencycontact" className={classes.marginTop}>
-      <Section>
-          <Title>
-            <h2>Emergency Contact Information</h2>
-          </Title>
-          <Detail>
-      <TextField
-          required
-          id="emergencyContactFirstName"
-          label="Emergency Contact First Name"
-          defaultValue={emergencyContactOneFirstName}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneFirstName(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="emergencyContactLastName"
-          label="Emergency Contact Last Name"
-          defaultValue={emergencyContactOneLastName}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneLastName(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="emergencyContactCell"
-          label="Emergency Contact Cell"
-          defaultValue={emergencyContactOneCellPhone}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneCellPhone(e.target.value)}
-        />
-
-      <TextField
-          id="emergencyContactHome"
-          label="Emergency Contact Home"
-          defaultValue={emergencyContactOneHomePhone}
-          variant="outlined"
-          onChange={e => _handleEmergencyContactOneHomePhone(e.target.value)}
-        />
-        </Detail>
-</Section>
-</Container>
-
-<Container component='Insurance' className={classes.marginTop}> 
-<Section>
-          <Title>
-            <h2>Emergency Contact Information</h2>
-          </Title>
-          <Detail>
-      <TextField
-          required
-          id="insuranceProvider"
-          label="Insurance Provider"
-          defaultValue={insuranceProvider}
-          variant="outlined"
-          onChange={e => _handleInsuranceProvider(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="policyNumber"
-          label="Policy Number"
-          defaultValue={insurancePolicyNumber}
-          variant="outlined"
-          onChange={e => _handleInsurancePolicyNumber(e.target.value)}
-        />
-
-      <TextField
-          required
-          id="insuranceGroup"
-          label="Group"
-          defaultValue={insuranceGroup}
-          variant="outlined"
-          onChange={e => _handleInsuranceGroup(e.target.value)}
-        />
-        </Detail>
-        </Section>
-        </Container>
-
-        <Container>
-        <Section>
-          <Title>
-            <h2>Ibuprofen Release</h2>
-          </Title>
-          <Detail>
-            
-      <FormControl component="fieldset" className={classes.form}>
-        <FormLabel component="legend"></FormLabel>
-        <RadioGroup aria-label="ibReleaseRadio" name="ibRelease" value={ibReleaseRadio} onChange={e => _handleIbReleaseRadio(e)}>
-          <FormControlLabel value="false" control={<Radio />} label="No" />
-          <FormControlLabel value="true" control={<Radio />} label="Yes" />
-        </RadioGroup>
-      </FormControl>
-      </Detail>
-      </Section>
+        <p></p>
+        <Typography variant="h4">
+          Remember, if you are sick with or exhibiting symptoms of COVID-19
+          (fever of 100.4˚ or greater, chills, cough, fever, difficulty
+          breathing, muscle aches, sore throat, diarrhea, recent loss of taste
+          or smell), or have had close contact with someone diagnosed with
+          COVID-19 within the last 14 days, you must not report to work.
+        </Typography>
       </Container>
+      <div>
+        <Container component="Q1">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Question 1:
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  Have you had close contact with someone who in the past 14
+                  days was diagnosed with COVID-19 or had a test confirming they
+                  have the virus?
+                </FormLabel>
+                <RadioGroup
+                  required
+                  id="question1"
+                  aria-label="Question 1"
+                  value={question1}
+                  onChange={_handleQuestion1}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Detail>
+          </Section>
+        </Container>
 
-
-
-        <Button size="large" variant="contained" className={classes.margin} color="primary" type="submit">
+        <Container component="Q2">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Question 2:
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  Within the last 10 days have you been diagnosed with COVID-19
+                  or had a test confirming you have the virus?
+                </FormLabel>
+                <RadioGroup
+                  required
+                  id="question2"
+                  aria-label="Question 2"
+                  value={question2}
+                  onChange={_handleQuestion2}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Detail>
+          </Section>
+        </Container>
+        <Container component="Q3">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Question 3:
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  Are you currently under an isolation or quarantine order?
+                </FormLabel>
+                <RadioGroup
+                  required
+                  id="question3"
+                  aria-label="Question 3"
+                  value={question3}
+                  onChange={_handleQuestion3}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Detail>
+          </Section>
+        </Container>
+        <Container component="Q4">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Question 4:
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  Have you had any one or more of these symptoms today or within
+                  the past 24 hours, which is new or not explained by a
+                  pre-existing condition?
+                </FormLabel>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Grid container spacing={2} columns={12}>
+                    <Grid item xs={12} md={6} lg={6}>
+                      <Item>
+                        Fever of 100.4 or greater, Chills, or Repeated
+                        Shaking/Shivering
+                      </Item>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={6}>
+                      <Item>Shortness of Breath, Difficulty Breathing</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Cough</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Sore Throat</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Feeling Unusually Weak or Fatigued</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Loss of Taste or Smell </Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Muscle Pain</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Headache</Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Runny or Congested Nose </Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Runny or Congested Nose </Item>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Item>Diarrhea</Item>
+                    </Grid>
+                  </Grid>
+                </Box>
+                <RadioGroup
+                  required
+                  id="question4"
+                  aria-label="Question 4"
+                  value={question4}
+                  onChange={_handleQuestion4}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Detail>
+          </Section>
+        </Container>
+        <Container component="Q5">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Question 5:
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  Have you traveled internationally or outside the state you
+                  reside within the past 14 days?
+                </FormLabel>
+                <RadioGroup
+                  required
+                  id="question5"
+                  aria-label="Question 5"
+                  value={question5}
+                  onChange={_handleQuestion5}
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Detail>
+          </Section>
+        </Container>
+        {question5 !== "yes" ? (
+          ""
+        ) : (
+          <Container component="Q5a">
+            <Section>
+              <Title>
+                <span className={classes.important}>*</span>Question 5a:
+              </Title>
+              <Detail>
+                <FormControl component="fieldset" className={classes.form}>
+                  <FormLabel component="legend" className={classes.question}>
+                    Where did you travel?
+                  </FormLabel>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="travelLocation"
+                    label="Travel Location"
+                    name="travelLocation"
+                    autoComplete="q5Location"
+                    onChange={(e) => _handleQ5Location(e.target.value)}
+                    value={q5Location}
+                  />
+                </FormControl>
+              </Detail>
+            </Section>
+          </Container>
+        )}
+        <Container component="signature">
+          <Section>
+            <Title>
+              <span className={classes.important}>*</span>Statement of
+              Acknowledgement and Release of Information
+            </Title>
+            <Detail>
+              <FormControl component="fieldset" className={classes.form}>
+                <FormLabel component="legend" className={classes.question}>
+                  By checking 'Yes' and typing my name below, I attest that my
+                  answers above are accurate to the best of my knowledge. I
+                  affirm I will notify the production team if there are any
+                  changes to my answers that occur after I complete this form,
+                  and before I arrive to the work location.
+                </FormLabel>
+                <FormLabel component="legend" className={classes.question}>
+                  I understand that COVID testing is a condition of employment
+                  on this production and I also authorize that the all the
+                  information I have given and all the results of COVID testing
+                  done while on this project can be released to my Employer, the
+                  production team, and to the state database.
+                </FormLabel>
+                <FormLabel componet="legend" className={classes.question}>
+                  I understand the safety measures in place to try and better
+                  protect myself and all crew members. If I have any questions
+                  about safety measures, I will follow up with the Set Medic or
+                  CCO.
+                </FormLabel>
+                <FormControlLabel
+                  required
+                  id="signature1Box"
+                  control={
+                    <Checkbox
+                      value={signature1box}
+                      onClick={(e) => _handleSignature1Box(e.target.value)}
+                    />
+                  }
+                  label="Yes"
+                  inputProps={{ "aria-label": "Signature 1 Checkbox" }}
+                />
+              </FormControl>
+              <TextField
+                variant="outlined"
+                required
+                disabled={!signature1box}
+                fullWidth
+                id="signature1"
+                label="Type your name"
+                name="signature1"
+                autoComplete="signature1"
+                onChange={(e) => _handleSignature1(e.target.value)}
+                value={signature1}
+              />
+            </Detail>
+          </Section>
+        </Container>
+        <Button
+          size="large"
+          variant="contained"
+          className={classes.margin}
+          color="primary"
+          disabled={loading}
+          type="submit"
+        >
           Submit Form
         </Button>
-
+        {loading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: green[500],
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              marginTop: "-12px",
+              marginLeft: "-12px",
+            }}
+          />
+        )}
+        {!!message && success ? message : message}
       </div>
     </form>
   );

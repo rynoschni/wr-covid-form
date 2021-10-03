@@ -81,6 +81,7 @@ router.post("/login", async (req, res) => {
         id: user.id,
       },
     });
+    console.log("user profile", userProfile)
     res.json(userProfile);
   } else {
     res.json({ msg: "Username or Password is incorrect" });
@@ -89,10 +90,9 @@ router.post("/login", async (req, res) => {
 
 // Update User
 router.put("/update/:id", async (req, res) => {
-  const userID = req.params.id;
+  const userID = parseInt(req.params.id);
   const {
     email,
-    password,
     fname,
     lname,
     address1,
@@ -119,7 +119,6 @@ router.put("/update/:id", async (req, res) => {
     },
     data: {
       email,
-      password,
       fname,
       lname,
       address1,

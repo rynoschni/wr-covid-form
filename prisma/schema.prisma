@@ -9,24 +9,20 @@ datasource db {
 
 model Form {
   id            Int      @id @default(autoincrement())
-  project       String   @db.VarChar(255)
+  project       String   @default("What Remains") @db.VarChar(255)
   question1     String?
   question2     String?
   question3     String?
   question4     String?
   question5     String?
-  question6     String?
-  question7     String?
-  question8     String?
+  q5Location    String?
   signature1    String?
   signature1box Boolean? @default(false)
-  signature2    String?
-  signature2box Boolean  @default(false)
   createdAt     DateTime @default(now()) @db.Timestamp(6)
-  authorId      Int
+  userID        Int
   temp          String?  @db.VarChar
   results       String?
-  user          User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User          User     @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Form_authorId_fkey")
 }
 
 model User {
@@ -51,5 +47,5 @@ model User {
   ecLastName  String?
   ecPhone     String?
   ecRelation  String?
-  form        Form[]
+  Form        Form[]
 }

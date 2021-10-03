@@ -5,14 +5,19 @@ const prisma = new PrismaClient();
 
 // Get All Forms
 router.get("/", async (req, res) => {
-  const forms = await Team.findMany();
+  const forms = await prisma.form.findMany();
   res.json(forms);
 });
 
-// Get Team by Date
+// Get Form by Date
 router.get("/:id", async (req, res) => {
-  const team = await Team.findMany(req.params.id);
-  res.json(team);
+  const forms = await prisma.form.findMany({
+    where: {
+      userID: req.params.id
+    }
+  });
+
+  res.json(forms);
 });
 
 // Get Users by Team ID
@@ -21,10 +26,31 @@ router.get("/:id/users", async (req, res) => {
   res.json(usersByTeam);
 });
 
-// Create Team
+// Answer new form
 router.post("/", async (req, res) => {
-  const team = await Team.create(req.body);
-  res.json(team);
+  const { question1, question2, question3, question4, question5, q5Location, signature1, signature1box, userID } = req.body
+  try {
+    const form = await prisma.form.create({
+      data: {
+        question1,
+        question2,
+        question3,
+        question4,
+        question5,
+        q5Location,
+        signature1,
+        signature1box,
+        userID,
+      },
+    });
+    console.log("Form",form)
+    res.json(form); 
+  }
+  catch (error) {
+    console.log(error);
+    res.json({ msg: "Sorry, your form was not submitted.  Please try again." });
+  }
+  
 });
 
 // Delete Team by ID
